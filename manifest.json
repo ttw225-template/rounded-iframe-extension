@@ -8,6 +8,9 @@
     "scripting"
   ],
   "action": {},
+  "icons": {
+    "32": "icon.png"
+  },
   "background": {
     "service_worker": "service-worker.js"
   },

@@ -1,58 +1,85 @@
-# Web Extension Template
+# Chrome Extension Template with Rounded Iframe
 
-This project is a web extension template that demonstrates how to create an iframe with rounded corners. The following section explains the CSS settings applied to the iframe and their purposes.
+This repository provides a Chrome extension template that demonstrates how to use an `iframe` to create a rounded-corner interface. The key design is achieved through the structural use of `iframe` along with CSS settings that ensure consistent appearance across both light and dark modes.
 
-## iframe CSS Settings
+## 1. Overview
+This extension displays a simple interface within an `iframe` with rounded corners. By leveraging the `color-scheme: light` CSS property, the extension maintains a clean and consistent look even when the website uses dark mode.
 
-Below is the code snippet from `service-worker.js` that creates the iframe for the extension UI:
+> The inspiration for this template stems from discussions across various platforms, including [Stack Overflow](https://stackoverflow.com/questions/27899635/how-to-make-border-radius-in-popup-chrome-extension) and the [Chrome Extensions Samples repository](https://github.com/GoogleChrome/chrome-extensions-samples/issues/657), where developers have explored methods to implement rounded corners in extensions. Notably, the Google Keep Chrome Extension has been recognized for its effective use of rounded corners. Inspired by its advanced techniques, this template simplifies and adapts those methods to assist developers in creating more visually appealing extension interfaces.
 
-```typescript
-// Create an iframe element for the extension UI
-const iframe: HTMLIFrameElement = document.createElement("iframe");
-iframe.id = frameID;
+## 1.1 Screenshots
 
-// The following CSS properties are applied with !important to override any page styles.
-// Some properties are critical for the extension's display, while others are optional for aesthetics.
+Below are the screenshots demonstrating the rounded-corner effect in both light and dark modes:
+
+### Light Mode
+![Rounded Corner Extension - Light Mode](./images/rounded_extension_light.png)
+
+### Dark Mode
+![Rounded Corner Extension - Dark Mode](./images/rounded_extension_dark.png)
+
+The interface is displayed within an `iframe` with rounded corners, ensuring consistency across light and dark modes.
+
+## 2. Architecture
+The extension consists of the following files:
+
+- **manifest.json**: Defines the extension's metadata and permissions.
+- **service-worker.js**: Manages the creation, injection, and behavior of the `iframe`.
+- **iframe.html**: The core HTML structure rendered inside the `iframe`.
+- **iframe-styles.css**: Styles the interface with rounded corners and shadows.
+- **README.md**: Documentation for developers.
+
+### Core Design Concept
+The rounded corners are achieved by:
+1. Creating an `iframe` and injecting it into the target page.
+2. Applying `border-radius` to the content within the `iframe`.
+3. Using `color-scheme: light` to prevent automatic dark mode transformations.
+
+```css
+.content-wrapper {
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3),
+              0 2px 6px rgba(60, 64, 67, 0.15);
+  background: #fff;
+}
+```
+
+## 3. How It Works
+- Clicking the extension icon toggles the `iframe`.
+- The `iframe` is positioned in the top-right corner of the webpage.
+- Clicking outside the `iframe` or pressing `Escape` closes it.
+- Dark mode is handled using `color-scheme: light`.
+
+### Key Snippet from `service-worker.js`
+```js
 iframe.style.cssText = `
-  /* Optional: Set the height of the iframe. Adjust based on your UI needs. */
-  height: 400px !important;
-
-  /* Optional: Set the width of the iframe. Adjust based on your UI needs. */
-  width: 300px !important;
-
-  /* Necessary: Use fixed positioning so the iframe stays in the viewport even when scrolling. */
   position: fixed !important;
-
-  /* Necessary: Position the iframe 5px from the right edge of the viewport. */
   right: 5px !important;
-
-  /* Necessary: Position the iframe 5px from the top of the viewport. */
   top: 5px !important;
-
-  /* Necessary: Ensure the iframe is above all other elements. The value is set extremely high. */
-  z-index: 2147483647 !important;
-
-  /* Optional: Remove any default border for a cleaner look. */
+  height: 400px !important;
+  width: 300px !important;
   border: none !important;
-
-  /* Optional: Set the background to transparent. This might be required if the iframe content has its own styling. */
   background: transparent !important;
-
-  /* Optional: Remove any default margin that may be applied. */
-  margin: 0 !important;
-
-  /* Optional: Remove any default padding that may be applied. */
-  padding: 0 !important;
-
-  /* Optional: Ensure the iframe is rendered as a block element, which is useful for layout consistency. */
-  display: block !important;
-
-  /* Optional: Explicitly set the iframe to be visible. This is generally the default. */
-  visibility: visible !important;
-
-  /* Optional: Set the opacity to fully opaque. This is generally the default. */
-  opacity: 1 !important;
+  border-radius: 10px !important;
+  color-scheme: light !important;
 `;
+```
 
-// Set the iframe's source to the extension's HTML file
-iframe.src = chrome.runtime.getURL("iframe.html");
+## 4. Installation
+1. Open Chrome and navigate to `chrome://extensions`.
+2. Enable Developer Mode.
+3. Click **Load Unpacked** and select the project folder.
+
+## 5. Customization
+- Adjust the `height` and `width` of the `iframe` in `service-worker.js`.
+- Modify `iframe-styles.css` for visual customization.
+
+## 6. Security Considerations
+- Ensure the `iframe` only loads trusted content.
+- Use a strict `Content-Security-Policy` to prevent potential vulnerabilities.
+
+## 7. Known Limitations
+- The extension currently displays a static interface. Additional UI elements or interactions can be implemented.
+- May behave inconsistently if the host website employs aggressive CSS resets.
+
+This template serves as a foundation for creating extensions with rounded interfaces using `iframe` elements and CSS strategies that maintain visual consistency across themes.
+
