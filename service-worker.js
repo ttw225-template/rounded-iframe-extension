@@ -32,55 +32,56 @@ chrome.action.onClicked.addListener((tab) => {
         const iframe = document.createElement("iframe");
         iframe.id = frameID;
 
-        // The following CSS properties are applied with !important to override any page styles.
+        // Apply the following CSS properties.
         // Some properties are critical for the extension's display, while others are optional for aesthetics.
+        // They currently do not use !important, but you can add !important if needed to override page styles.
         iframe.style.cssText = `
           /* ====== Positioning ====== */
           /* Necessary: Use fixed positioning so the iframe stays in the viewport even when scrolling */
-          position: fixed !important;
+          position: fixed;
 
           /* Necessary: Position the iframe 5px from the right edge of the viewport */
-          right: 5px !important;
+          right: 5px;
 
           /* Necessary: Position the iframe 5px from the top of the viewport */
-          top: 5px !important;
+          top: 5px;
 
           /* Necessary: Ensure the iframe is above all other elements. The value is set extremely high */
-          z-index: 2147483647 !important;
+          z-index: 2147483647;
 
           /* ====== Sizing ====== */
           /* Optional: Set the height of the iframe. Adjust based on your UI needs. */
-          height: 400px !important;
+          height: 400px;
 
           /* Optional: Set the width of the iframe. Adjust based on your UI needs. */
-          width: 300px !important;
+          width: 300px;
 
           /* ====== Appearance ====== */
           /* Optional: Remove any default border for a cleaner look */
-          border: none !important;
+          border: none;
 
           /* Optional: Set the background to transparent. This might be required if the iframe content has its own styling */
-          background: transparent !important;
+          background: transparent;
 
           /* Optional: Remove any default margin that may be applied */
-          margin: 0 !important;
+          margin: 0;
 
           /* Optional: Remove any default padding that may be applied */
-          padding: 0 !important;
+          padding: 0;
 
           /* ====== Visibility ====== */
           /* Optional: Ensure the iframe is rendered as a block element, which is useful for layout consistency */
-          display: block !important;
+          display: block;
 
           /* Optional: Explicitly set the iframe to be visible. This is generally the default */
-          visibility: visible !important;
+          visibility: visible;
 
           /* Optional: Set the opacity to fully opaque. This is generally the default */
-          opacity: 1 !important;
+          opacity: 1;
 
           /* ====== Color Scheme ====== */
           /* Necessary: Force the iframe to always use the light color scheme, even in dark mode */
-          color-scheme: light !important;
+          color-scheme: light;
         `;
         iframe.src = chrome.runtime.getURL("iframe.html");
 
