@@ -52,15 +52,22 @@ The rounded corners are achieved by:
 ### Key Snippet from `service-worker.js`
 ```js
 iframe.style.cssText = `
-  position: fixed !important;
-  right: 5px !important;
-  top: 5px !important;
-  height: 400px !important;
-  width: 300px !important;
-  border: none !important;
-  background: transparent !important;
-  border-radius: 10px !important;
-  color-scheme: light !important;
+  /* Positioning */
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  z-index: 2147483647;
+
+  /* Sizing */
+  height: 400px;
+  width: 300px;
+
+  /* Appearance */
+  border: none;
+  background: transparent;
+
+  /* Color Scheme */
+  color-scheme: light;
 `;
 ```
 
