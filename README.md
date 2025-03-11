@@ -1,4 +1,4 @@
-# Chrome Extension Template with Rounded Iframe
+# Rounded Iframe Chrome Extension – A UI Enhancement Template
 
 This repository provides a Chrome extension template that demonstrates how to use an `iframe` to create a rounded-corner interface. The key design is achieved through the structural use of `iframe` along with CSS settings that ensure consistent appearance across both light and dark modes.
 
